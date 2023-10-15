@@ -7,6 +7,9 @@ Abaixo, vemos o modelo lógico, possuindo os principais dados para o restantes d
 
 ## 2º Escreva o script SQL que cria o banco de dados;
 
+``` SQL
+Inserir o código aqui
+
     -- MySQL Workbench Forward Engineering
     
     SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -326,42 +329,56 @@ Abaixo, vemos o modelo lógico, possuindo os principais dados para o restantes d
     SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
     SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+``` 
+
 ## 3º Inserir dados nas tabelas (Pizza e Embalagem); 
 
 ![image](https://github.com/WanderleiJullia/Pizzas.README/assets/144744092/2c53a0d5-a661-453f-99f2-fe21b12f0745)
 
+  ``` SQL
+  Inserir o código aqui
 
     insert into pizza (id_Pizza, Sabor, Descricao, Preco, Tamanho, Material_emba, Tamanho_emba, Preco_emba) values (1,'Queijo', 'Pizza de Queijo', 30.05, 'Pequena', 'Papelao', 'Pequena', 9.60);
     insert into pizza (id_Pizza, Sabor, Descricao, Preco, Tamanho, Material_emba, Tamanho_emba, Preco_emba) values (2,'Frango', 'Pizza de Frango ', 50.90, 'Grande', 'Papelao', 'Grande', 15.80);
     insert into pizza (id_Pizza, Sabor, Descricao, Preco, Tamanho, Material_emba, Tamanho_emba, Preco_emba) values (3,'Atum', 'Pizza de Atum', 48.56, 'Media', 'Papelao', 'Media', 11.20);
     insert into pizza (id_Pizza, Sabor, Descricao, Preco, Tamanho, Material_emba, Tamanho_emba, Preco_emba) values (4,'Calabresa', 'Pizza de Calabresa', 98.80, 'Trem', 'Papelao', 'Big', 30.50);
-
+  ``` 
+      
 ## 4º Inserir dados de Ingredientes; 
 
 ![image](https://github.com/WanderleiJullia/Pizzas.README/assets/144744092/36fb3474-1c3c-44a0-8018-be5465610c4a)
 
+``` SQL
+Inserir o código aqui
     insert into ingredientes (Id_Ingredientes, Ingredientes) values (1, 'Queijo, Molho de tomate');
     insert into ingredientes (Id_Ingredientes, Ingredientes) values (2, 'Frango, Tomate, Cebola');
     insert into ingredientes (Id_Ingredientes, Ingredientes) values (3, 'Atum, Cebola, Queijo');
     insert into ingredientes (Id_Ingredientes, Ingredientes) values (4, 'Calabresa, Cebola');
+``` 
 
 ## 5º Inserir dados de Pizzaiolo; 
 
 ![image](https://github.com/WanderleiJullia/Pizzas.README/assets/144744092/07cc0304-34aa-43ea-8ff7-55343f6625e9)
 
+``` SQL
+Inserir o código aqui 
     insert into pizzaiolo (id_Pizzaiolo, Nome, Salario) values (1, 'Paulo', 1.300);
     insert into pizzaiolo (id_Pizzaiolo, Nome, Salario) values (2, 'Jullia', 1.900);
     insert into pizzaiolo (id_Pizzaiolo, Nome, Salario) values (3, 'Guilherme', 2.000);
     insert into pizzaiolo (id_Pizzaiolo, Nome, Salario) values (4, 'Gustavo', 3.000);
+``` 
 
 ## 6º Inserir Receita de cada pizza e o autor.
 
 ![image](https://github.com/WanderleiJullia/Pizzas.README/assets/144744092/722af6d4-485a-4eab-9c27-4ea45765fbd2)
 
+``` SQL
+Inserir o código aqui 
     insert into receita (Instrucoes, Autor, Pizza_id_Pizza) values ('Massa de Pizza, Queijo, Molho de tomate', 'Paulo', 1);
     insert into receita (Instrucoes, Autor, Pizza_id_Pizza) values ('Massa de Pizza, Frango, Milho, Tomate', 'Jullia', 2);
     insert into receita (Instrucoes, Autor, Pizza_id_Pizza) values ('Massa de Pizza, Atum, Queijo', 'Guilherme', 3);
     insert into receita (Instrucoes, Autor, Pizza_id_Pizza) values ('Massa de Pizza, Calabresa, Cebola', 'Gustavo', 4);
+``` 
 
 ## EXERCICIOS. 
 
@@ -369,14 +386,20 @@ Abaixo, vemos o modelo lógico, possuindo os principais dados para o restantes d
 
 ![image](https://github.com/WanderleiJullia/Pizzas.README/assets/144744092/6028e1ba-f3de-4ffd-91b4-f87272458c4e)
 
+``` SQL
+Inserir o código aqui  
     select pizza.sabor as Tab_SaborPizza, pizzaiolo.nome as pizzaiolo 
     from pizza 
     join pizzaiolo_has_pizza on Pizza.id_Pizza = pizzaiolo_has_pizza.Pizza_id_Pizza 
     join pizzaiolo on pizzaiolo_has_pizza.Pizzaiolo_id_Pizzaiolo  = Pizzaiolo.id_Pizzaiolo;
+```
 
 ## Crie um relatório com todas as pizzas e seus ingredientes;
 
 ![image](https://github.com/WanderleiJullia/Pizzas.README/assets/144744092/12ddc2b9-e77f-4891-a89a-5ba0b0f314af)
+
+``` SQL
+Inserir o código aqui
 
     select 
     	pizza.sabor as sabor, 
@@ -384,30 +407,35 @@ Abaixo, vemos o modelo lógico, possuindo os principais dados para o restantes d
     from pizza join ingredientes_has_pizza on pizza.id_pizza =  ingredientes_has_pizza.pizza_id_pizza
     join ingredientes on ingredientes_has_pizza.ingredientes_id_ingredientes = ingredientes.id_ingredientes
     group by pizza.sabor;
-
+``` 
 
 ## Crie um relatório com todos os ingredientes e as pizzas onde são utilizados;
 
 ![image](https://github.com/WanderleiJullia/Pizzas.README/assets/144744092/cb1e3d6e-4d1a-4d21-967f-e6ea9eb5815d)
 
+```SQL
+Inserir o código aqui
     select 
     	ingredientes.ingredientes_pizza as Ingredientes,
         group_concat(pizza.sabor) as Sabor
     from ingredientes join ingredientes_has_pizza on ingredientes.id_ingredientes =  ingredientes_has_pizza.ingredientes_id_ingredientes
     join pizza on ingredientes_has_pizza.pizza_id_pizza = pizza.id_pizza
     GROUP BY ingredientes.ingredientes_pizza;
+``` 
 
 ## Crie um relatório com os sabores de todas as pizzas, o nome dos pizzaiolos queas fazem e as instruções para produzi-las.
 
 ![image](https://github.com/WanderleiJullia/Pizzas.README/assets/144744092/4603198b-05e7-42fa-9a5b-4b906e066d7a)
 
+``` SQL
+Inserir o código aqui 
     select 
     	ingredientes.ingredientes_pizza as Ingredientes,
         group_concat(pizza.sabor) as Sabor
     from ingredientes join ingredientes_has_pizza on ingredientes.id_ingredientes =  ingredientes_has_pizza.ingredientes_id_ingredientes
     join pizza on ingredientes_has_pizza.pizza_id_pizza = pizza.id_pizza
     GROUP BY ingredientes.ingredientes_pizza;
-
+``` 
 
 ## Jullia Santos Wanderlei
 
